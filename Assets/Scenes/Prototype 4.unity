@@ -148,10 +148,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5594481f6bcfe0848be1218ef17b92f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnManager
-  enemyPrefab: {fileID: 4910133122749679215, guid: 8212ca2f702d00248941decc998988c6, type: 3}
-  powerupPrefab: {fileID: 6423774125192830733, guid: 4e2d49914c9e1aa43afc5dc96df77703, type: 3}
+  enemyPrefab:
+  - {fileID: 4910133122749679215, guid: 8212ca2f702d00248941decc998988c6, type: 3}
+  - {fileID: 4910133122749679215, guid: ba6c781881515b443b44c06cde52435f, type: 3}
   enemyCount: 0
   waveNumber: 1
+  powerupPrefabs:
+  - {fileID: 6423774125192830733, guid: 4e2d49914c9e1aa43afc5dc96df77703, type: 3}
+  - {fileID: 6423774125192830733, guid: f1149763e84c6d54f848778d65ce4555, type: 3}
+  - {fileID: 329383845186929994, guid: bd2d453bbe5d99348a26e529a2e5c943, type: 3}
+  bossPrefab: {fileID: 2310267019353780311, guid: 464a90531a4ed7e47931326fbe21367e, type: 3}
+  miniEnemyPrefabs:
+  - {fileID: 6174652471104770714, guid: b2b0c3c53752f7942868277e9fc25383, type: 3}
+  - {fileID: 4606079707653174827, guid: acfc7b0374f462e4cbd3f4ba50c8009a, type: 3}
+  bossRound: 2
 --- !u!4 &8397680
 Transform:
   m_ObjectHideFlags: 0
@@ -178,30 +188,6 @@ PrefabInstance:
     - target: {fileID: 610417642452160544, guid: 3fd5555088952419ebf0eb82e9096fa5, type: 3}
       propertyPath: m_Name
       value: FX_Mist
-      objectReference: {fileID: 0}
-    - target: {fileID: 610417642452160544, guid: 3fd5555088952419ebf0eb82e9096fa5, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2010543769895121089, guid: 3fd5555088952419ebf0eb82e9096fa5, type: 3}
-      propertyPath: m_Materials.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3712298786234418515, guid: 3fd5555088952419ebf0eb82e9096fa5, type: 3}
-      propertyPath: InitialModule.startSize.scalar
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 3712298786234418515, guid: 3fd5555088952419ebf0eb82e9096fa5, type: 3}
-      propertyPath: InitialModule.startSize.minScalar
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3712298786234418515, guid: 3fd5555088952419ebf0eb82e9096fa5, type: 3}
-      propertyPath: EmissionModule.rateOverTime.scalar
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7382815964509602841, guid: 3fd5555088952419ebf0eb82e9096fa5, type: 3}
-      propertyPath: m_RootOrder
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7382815964509602841, guid: 3fd5555088952419ebf0eb82e9096fa5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -402,7 +388,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   speed: 3
   hasPowerup: 0
-  powerUpIndicator: {fileID: 1450216723}
+  powerupIndicator: {fileID: 1450216723}
+  currentPowerUp: 0
+  rocketPrefab: {fileID: 1660442735436276866, guid: ae8c7560d622bba4e80ee8fb0f42e947, type: 3}
+  hangTime: 0
+  smashSpeed: 0
+  explosionForce: 0
+  explosionRadius: 0
 --- !u!1 &1211016355
 GameObject:
   m_ObjectHideFlags: 0
@@ -726,22 +718,6 @@ PrefabInstance:
       value: Island
       objectReference: {fileID: 0}
     - target: {fileID: 4625923886776944, guid: 961be46ca9a355943ae3f65c47741bb0, type: 3}
-      propertyPath: m_RootOrder
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4625923886776944, guid: 961be46ca9a355943ae3f65c47741bb0, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4625923886776944, guid: 961be46ca9a355943ae3f65c47741bb0, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4625923886776944, guid: 961be46ca9a355943ae3f65c47741bb0, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4625923886776944, guid: 961be46ca9a355943ae3f65c47741bb0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0
       objectReference: {fileID: 0}
@@ -784,38 +760,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1301643505922104, guid: 961be46ca9a355943ae3f65c47741bb0, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1403545342}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 961be46ca9a355943ae3f65c47741bb0, type: 3}
---- !u!1 &1403545341 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1301643505922104, guid: 961be46ca9a355943ae3f65c47741bb0, type: 3}
-  m_PrefabInstance: {fileID: 1403545340}
-  m_PrefabAsset: {fileID: 0}
---- !u!64 &1403545342
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1403545341}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 8878a37eb67ddac4ead51890a31d6a18, type: 3}
 --- !u!1001 &1450216722
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -827,22 +773,6 @@ PrefabInstance:
     - target: {fileID: 1742899641471652, guid: 923deea38dc6a8843b15db7638919c1e, type: 3}
       propertyPath: m_Name
       value: Powerup Indicator
-      objectReference: {fileID: 0}
-    - target: {fileID: 1742899641471652, guid: 923deea38dc6a8843b15db7638919c1e, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4428908044626120, guid: 923deea38dc6a8843b15db7638919c1e, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4428908044626120, guid: 923deea38dc6a8843b15db7638919c1e, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4428908044626120, guid: 923deea38dc6a8843b15db7638919c1e, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4428908044626120, guid: 923deea38dc6a8843b15db7638919c1e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -902,10 +832,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5831814716121893815, guid: 363a8f737719f4d2eafb35f885f3706f, type: 3}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 5831814716121893815, guid: 363a8f737719f4d2eafb35f885f3706f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
